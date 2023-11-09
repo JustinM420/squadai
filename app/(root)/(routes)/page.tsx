@@ -1,5 +1,6 @@
 import { SearchInput } from "@/components/SearchInput";
 import { Categories } from "@/components/categories";
+import { AgentCard } from "@/components/agentCard";
 import prismadb from "@/lib/prismadb";
 
 interface RootPageProps {
@@ -36,6 +37,7 @@ const RootPage = async ({
         <div className="h-full p-4 space-y-2">
             <SearchInput />
             <Categories data={categories} />
+            <AgentCard data={data} />
         </div>
      );
 }
