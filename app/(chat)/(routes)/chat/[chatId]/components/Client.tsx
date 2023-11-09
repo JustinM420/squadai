@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import ChatForm from "@/components/chat-form";
 import { ChatMessages } from "@/components/chat-messages";
+import { ChatMessageProps } from "@/components/chat-message";
 
 interface ChatClientProps {
     agent: Agents & {
@@ -20,7 +21,7 @@ export const ChatClient = ({
     agent
 }: ChatClientProps) => {
 const router = useRouter();
-const [messages, setMessages] = useState<any[]>(agent.messages);
+const [messages, setMessages] = useState<ChatMessageProps[]>(agent.messages);
 
 const {
     input,
@@ -31,7 +32,7 @@ const {
 } = useCompletion({
     api: `/api/chat/${agent.id}`,
     onFinish(prompt, completion) {
-        const systemMessage = {
+        const systemMessage: ChatMessageProps = {
             role: "system",
             content: completion,
         };
@@ -45,7 +46,7 @@ const {
 
 
 const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    const userMessage = {
+    const userMessage: ChatMessageProps = {
         role: "user",
         content: input,
     };
